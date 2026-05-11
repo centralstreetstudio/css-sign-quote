@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
   html, body {
     background: transparent;
     font-family: 'DM Sans', sans-serif;
@@ -16,19 +16,19 @@
     margin: 0;
     width: 100%;
   }
- 
+
   .wrap { width: 100%; padding: 8px; }
- 
+
   .eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #8a7560; margin-bottom: 6px; text-align: center; }
   .title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 400; color: #2c2318; line-height: 1.2; margin-bottom: 4px; text-align: center; }
   .title em { font-style: italic; color: #6b5140; }
   .subtitle { font-size: 11px; color: #9a8872; letter-spacing: 0.04em; text-align: center; margin-bottom: 16px; }
- 
+
   .rule { border: none; border-top: 1px solid #d6c9b0; margin: 16px 0; }
   .rule-double { border: none; height: 4px; border-top: 1px solid #d6c9b0; border-bottom: 1px solid #d6c9b0; margin: 16px 0; }
- 
+
   .section-label { font-size: 9.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #8a7560; margin-bottom: 10px; }
- 
+
   .choice {
     background: #f0ebe0;
     border: 1.5px solid #d6c9b0;
@@ -57,7 +57,7 @@
   .choice.selected .choice-note { color: #a09080; }
   .choice-price { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: #2c2318; white-space: nowrap; }
   .choice.selected .choice-price { color: #f5f0e8; }
- 
+
   .counter-row { background: #f0ebe0; border: 1.5px solid #d6c9b0; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
   .counter-label { font-size: 13px; font-weight: 500; color: #2c2318; margin-bottom: 2px; }
   .counter-note { font-size: 11px; color: #9a8872; }
@@ -67,20 +67,20 @@
   .counter-val { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: #2c2318; min-width: 20px; text-align: center; }
   .counter-price { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: #2c2318; }
   .bundle-tag { display: inline-block; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 6px; border: 1px solid #b8a88a; color: #7a6550; background: #ede6d8; margin-left: 6px; vertical-align: middle; }
- 
+
   .total-bar { background: #2c2318; padding: 14px 16px; margin: 16px 0; }
   .total-top { display: flex; justify-content: space-between; align-items: baseline; }
   .total-label-text { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #a09080; }
   .total-amount { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600; color: #f5f0e8; }
   .total-breakdown { font-size: 10px; color: #a09080; margin-top: 4px; line-height: 1.5; }
- 
+
   /* Summary + CTA */
   .summary-box { background: #f0ebe0; border: 1.5px solid #d6c9b0; padding: 16px; margin-bottom: 12px; }
   .summary-title { font-size: 9.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #8a7560; margin-bottom: 10px; }
   .summary-line { display: flex; justify-content: space-between; font-size: 12px; color: #2c2318; padding: 4px 0; border-bottom: 0.5px solid #d6c9b0; }
   .summary-line:last-child { border-bottom: none; }
   .summary-line span:last-child { font-weight: 500; }
- 
+
   .cta-box { background: #2c2318; padding: 20px; text-align: center; }
   .cta-instruction { font-size: 12px; color: #a09080; line-height: 1.7; margin-bottom: 14px; }
   .cta-instruction strong { color: #f5f0e8; font-weight: 500; }
@@ -99,19 +99,19 @@
     width: 100%;
   }
   .cta-btn:hover { background: #ede6d8; }
- 
+
   .hidden { display: none !important; }
 </style>
 </head>
 <body>
 <div class="wrap">
- 
+
   <p class="eyebrow">Central Street Studio</p>
   <h1 class="title">Build Your <em>Custom Sign</em></h1>
   <p class="subtitle">Handmade cedar + birch - laser engraved - built to order</p>
- 
+
   <div class="rule-double"></div>
- 
+
   <!-- Frame -->
   <div style="background:#f0ebe0; border:1.5px solid #d6c9b0; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
     <div>
@@ -120,10 +120,10 @@
     </div>
     <span style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; color:#2c2318;">$30</span>
   </div>
- 
+
   <!-- Logo Panel -->
   <p class="section-label">Logo panel</p>
- 
+
   <div class="choice selected" data-group="logo" data-price="40" data-label="Engraved" onclick="selectChoice(this)">
     <div class="choice-left">
       <div class="choice-radio"></div>
@@ -134,7 +134,7 @@
     </div>
     <span class="choice-price">$40</span>
   </div>
- 
+
   <div class="choice" data-group="logo" data-price="75" data-label="3D layered" onclick="selectChoice(this)">
     <div class="choice-left">
       <div class="choice-radio"></div>
@@ -146,9 +146,9 @@
     </div>
     <span class="choice-price">$75</span>
   </div>
- 
+
   <div class="rule"></div>
- 
+
   <!-- Sub-signs -->
   <p class="section-label">Sub-sign panels</p>
   <div class="counter-row">
@@ -163,12 +163,12 @@
       <span class="counter-price" id="panelTotal">$60</span>
     </div>
   </div>
- 
+
   <div class="rule"></div>
- 
+
   <!-- Mounting -->
   <p class="section-label">Mounting option</p>
- 
+
   <div class="choice selected" data-group="mount" data-price="0" data-label="Standard mounting" onclick="selectChoice(this)">
     <div class="choice-left">
       <div class="choice-radio"></div>
@@ -179,7 +179,7 @@
     </div>
     <span class="choice-price">Included</span>
   </div>
- 
+
   <div class="choice" data-group="mount" data-price="8" data-label="Tent-mount hardware kit" onclick="selectChoice(this)">
     <div class="choice-left">
       <div class="choice-radio"></div>
@@ -191,7 +191,7 @@
     </div>
     <span class="choice-price">+$8</span>
   </div>
- 
+
   <div class="choice" data-group="mount" data-price="12" data-label="Magnet mount" onclick="selectChoice(this)">
     <div class="choice-left">
       <div class="choice-radio"></div>
@@ -203,7 +203,7 @@
     </div>
     <span class="choice-price">+$12</span>
   </div>
- 
+
   <!-- Total -->
   <div class="total-bar">
     <div class="total-top">
@@ -212,7 +212,7 @@
     </div>
     <p class="total-breakdown" id="totalBreakdown">Cedar frame $30 + Engraved logo $40 + 3 panels $60</p>
   </div>
- 
+
   <!-- Summary + CTA -->
   <div class="summary-box">
     <p class="summary-title">Your selections</p>
@@ -225,20 +225,21 @@
       <span id="summaryTotal" style="font-family:'Playfair Display',serif; font-size:16px; font-weight:600;">$130</span>
     </div>
   </div>
- 
+
   <div class="cta-box">
-    <p class="cta-instruction">Ready to move forward? Email your logo to <strong>info@centralstreetstudio.com</strong> and your selections will be included automatically. Becca will confirm details and send a digital proof before anything is made.</p>
+    <p class="cta-instruction">Ready to move forward? Click the button below — it will open a pre-filled email with your selections included. Just attach your logo and hit send. Becca will confirm details and send a digital proof before anything is made.</p>
     <a class="cta-btn" id="ctaBtn" href="mailto:info@centralstreetstudio.com">Email your logo to get started</a>
+    <p style="font-size:10px; color:#a09080; margin-top:12px; line-height:1.6;">If you have any trouble, email your selections and logo directly to <strong style="color:#c8baa8;">info@centralstreetstudio.com</strong></p>
   </div>
- 
+
 </div>
- 
+
 <script>
   const FRAME = 30;
   let logoPrice = 40, logoLabel = 'Engraved';
   let panelCount = 3;
   let mountPrice = 0, mountLabel = 'Standard mounting';
- 
+
   function selectChoice(el) {
     const group = el.dataset.group;
     document.querySelectorAll(`.choice[data-group="${group}"]`).forEach(c => c.classList.remove('selected'));
@@ -247,7 +248,7 @@
     else if (group === 'mount') { mountPrice = parseInt(el.dataset.price); mountLabel = el.dataset.label; }
     updateTotal();
   }
- 
+
   function changeCount(delta) {
     panelCount = Math.max(0, Math.min(8, panelCount + delta));
     document.getElementById('panelCount').textContent = panelCount;
@@ -258,25 +259,25 @@
     panelCount >= 4 ? tag.classList.remove('hidden') : tag.classList.add('hidden');
     updateTotal();
   }
- 
+
   function updateTotal() {
     const rate = panelCount >= 4 ? 18 : 20;
     const panelTotal = panelCount * rate;
     const total = FRAME + logoPrice + panelTotal + mountPrice;
- 
+
     // Update total bar
     document.getElementById('totalAmount').textContent = '$' + total;
     let b = 'Cedar frame $30 + ' + logoLabel + ' logo $' + logoPrice;
     if (panelCount > 0) b += ' + ' + panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' $' + panelTotal;
     if (mountPrice > 0) b += ' + ' + mountLabel;
     document.getElementById('totalBreakdown').textContent = b;
- 
+
     // Update summary box
     document.getElementById('summaryLogo').textContent = logoLabel + ' — $' + logoPrice;
     document.getElementById('summaryPanels').textContent = panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' — $' + panelTotal;
     document.getElementById('summaryMount').textContent = mountPrice > 0 ? mountLabel + ' — +$' + mountPrice : 'Standard — included';
     document.getElementById('summaryTotal').textContent = '$' + total;
- 
+
     // Update mailto link with selections pre-filled
     const subject = encodeURIComponent('Custom Sign Quote Request');
     const body = encodeURIComponent(
@@ -291,9 +292,9 @@
     );
     document.getElementById('ctaBtn').href = 'mailto:info@centralstreetstudio.com?subject=' + subject + '&body=' + body;
   }
- 
+
   updateTotal();
- 
+
   function notifyHeight() {
     window.parent.postMessage({ type: 'resize', height: document.body.scrollHeight }, '*');
   }
