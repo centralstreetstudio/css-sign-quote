@@ -98,14 +98,7 @@
   .field input:focus, .field textarea:focus { border-color: #8a7560; }
   .field textarea { resize: vertical; min-height: 70px; }
 
-  /* Upload */
-  .upload-zone { background: #f0ebe0; border: 1.5px dashed #b8a88a; padding: 16px; text-align: center; cursor: pointer; transition: border-color 0.15s; }
-  .upload-zone:hover { border-color: #8a7560; }
-  .upload-zone.has-file { border-style: solid; border-color: #2c2318; background: #e8e0d0; }
-  .upload-label { font-size: 12px; color: #8a7560; line-height: 1.6; }
-  .upload-label strong { color: #5a4a38; font-weight: 500; display: block; margin-bottom: 2px; }
-  .upload-filename { font-size: 12px; color: #2c2318; font-weight: 500; margin-top: 4px; }
-  #logoFile { display: none; }
+  /* Upload placeholder removed - file sent via email */
 
   /* Submit */
   .submit-btn { width: 100%; background: #2c2318; color: #f5f0e8; border: none; padding: 14px; font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 400; font-style: italic; letter-spacing: 0.04em; cursor: pointer; transition: background 0.15s; margin-top: 4px; }
@@ -266,11 +259,9 @@
 
     <div class="field">
       <label>Logo file</label>
-      <div class="upload-zone" onclick="document.getElementById('logoFile').click()" id="uploadZone">
-        <p class="upload-label"><strong>Click to upload your logo</strong>SVG, AI, EPS, PNG, or JPG accepted<br>File prep is included</p>
-        <p class="upload-filename" id="uploadFilename"></p>
+      <div style="background:#f0ebe0; border:1.5px solid #d6c9b0; padding:12px 14px;">
+        <p style="font-size:12px; color:#5a4a38; line-height:1.6;">After submitting, please email your logo file to <strong>info@centralstreetstudio.com</strong> — SVG, AI, EPS, PNG, or JPG accepted. File prep is included.</p>
       </div>
-      <input type="file" id="logoFile" name="logoFile" accept=".svg,.ai,.eps,.png,.jpg,.jpeg,.pdf">
     </div>
 
     <button class="submit-btn" id="submitBtn" onclick="submitQuote(event)">Request my quote</button>
@@ -322,12 +313,7 @@
     document.getElementById('totalBreakdown').textContent = b;
   }
 
-  document.getElementById('logoFile').addEventListener('change', function() {
-    const zone = document.getElementById('uploadZone');
-    const nameEl = document.getElementById('uploadFilename');
-    if (this.files && this.files[0]) { zone.classList.add('has-file'); nameEl.textContent = this.files[0].name; }
-    else { zone.classList.remove('has-file'); nameEl.textContent = ''; }
-  });
+  
 
   async function submitQuote(e) {
     e.preventDefault();
@@ -350,7 +336,7 @@
     formData.append('Panel words', document.getElementById('panelWords').value.trim());
     formData.append('Notes', document.getElementById('notes').value.trim());
     const fileInput = document.getElementById('logoFile');
-    if (fileInput.files && fileInput.files[0]) formData.append('logoFile', fileInput.files[0]);
+    if (fileInput && fileInput.files && fileInput.files[0]) formData.append('logoFile', fileInput.files[0]);
     try {
       const res = await fetch('https://formspree.io/f/mbdwqznv', { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
       if (res.ok) {
