@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Sign Quote - Central Street Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    color: #2c2318;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .card {
+    background: #faf7f2;
+    border: 1.5px solid #d6c9b0;
+    padding: 40px 44px;
+    position: relative;
+    margin-bottom: 12px;
+    width: 100%;
+  }
+
+  .card::before, .card::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-color: #b8a88a;
+    border-style: solid;
+  }
+  .card::before { top: 10px; left: 10px; border-width: 1.5px 0 0 1.5px; }
+  .card::after  { bottom: 10px; right: 10px; border-width: 0 1.5px 1.5px 0; }
+  .corner-tr { position: absolute; top: 10px; right: 10px; width: 18px; height: 18px; border: 1.5px solid #b8a88a; border-bottom: none; border-left: none; }
+  .corner-bl { position: absolute; bottom: 10px; left: 10px; width: 18px; height: 18px; border: 1.5px solid #b8a88a; border-top: none; border-right: none; }
+
+  .header { text-align: center; margin-bottom: 28px; }
+  .eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #8a7560; margin-bottom: 6px; }
+  .title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 400; color: #2c2318; line-height: 1.2; margin-bottom: 4px; }
+  .title em { font-style: italic; color: #6b5140; }
+  .subtitle { font-size: 12px; color: #9a8872; letter-spacing: 0.04em; }
+
+  .rule { border: none; border-top: 1px solid #d6c9b0; margin: 22px 0; }
+  .rule-double { border: none; height: 4px; border-top: 1px solid #d6c9b0; border-bottom: 1px solid #d6c9b0; margin: 22px 0; }
+
+  .section-label { font-size: 9.5px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #8a7560; margin-bottom: 12px; }
+
+  /* Choice grid */
+  .choice-grid { display: grid; gap: 8px; }
+  .choice-grid.cols2 { grid-template-columns: 1fr 1fr; }
+  .choice-grid.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .choice {
+    background: #f0ebe0;
+    border: 1.5px solid #d6c9b0;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+    position: relative;
+  }
+
+  .choice:hover { border-color: #8a7560; }
+
+  .choice.selected {
+    background: #2c2318;
+    border-color: #2c2318;
+  }
+
+  .choice-name { font-size: 13px; font-weight: 500; color: #2c2318; margin-bottom: 2px; line-height: 1.3; }
+  .choice-desc { font-size: 11px; color: #9a8872; line-height: 1.4; margin-bottom: 8px; }
+  .choice-note { font-size: 10px; color: #9a8872; font-style: italic; line-height: 1.4; margin-top: 4px; }
+  .choice-price { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: #2c2318; }
+
+  .choice.selected .choice-name { color: #f5f0e8; }
+  .choice.selected .choice-desc { color: #a09080; }
+  .choice.selected .choice-note { color: #a09080; }
+  .choice.selected .choice-price { color: #f5f0e8; }
+
+  .choice .check {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #b8a88a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .choice.selected .check {
+    background: #f5f0e8;
+    border-color: #f5f0e8;
+  }
+
+  .choice.selected .check::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2c2318;
+  }
+
+  /* Panel counter */
+  .counter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f0ebe0;
+    border: 1.5px solid #d6c9b0;
+    padding: 14px 18px;
+  }
+
+  .counter-left { }
+  .counter-label { font-size: 13px; font-weight: 500; color: #2c2318; margin-bottom: 2px; }
+  .counter-note { font-size: 11px; color: #9a8872; }
+
+  .counter-controls { display: flex; align-items: center; gap: 16px; }
+  .counter-btn {
+    width: 32px;
+    height: 32px;
+    background: #faf7f2;
+    border: 1.5px solid #d6c9b0;
+    color: #2c2318;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.1s;
+  }
+  .counter-btn:hover { background: #e8e0d0; }
+  .counter-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: #2c2318; min-width: 24px; text-align: center; }
+  .counter-price { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: #2c2318; }
+
+  /* Running total */
+  .total-bar {
+    background: #2c2318;
+    padding: 16px 20px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 22px;
+  }
+
+  .total-label-text { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #a09080; }
+  .total-amount { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 600; color: #f5f0e8; }
+  .total-breakdown { font-size: 11px; color: #a09080; margin-top: 2px; }
+
+  /* Contact form */
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #8a7560; margin-bottom: 6px; }
+  .field input, .field textarea {
+    width: 100%;
+    background: #f0ebe0;
+    border: 1.5px solid #d6c9b0;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: #2c2318;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .field input:focus, .field textarea:focus { border-color: #8a7560; }
+  .field textarea { resize: vertical; min-height: 80px; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* File upload */
+  .upload-zone {
+    background: #f0ebe0;
+    border: 1.5px dashed #b8a88a;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .upload-zone:hover { border-color: #8a7560; background: #ede6d8; }
+  .upload-zone.has-file { border-style: solid; border-color: #2c2318; background: #e8e0d0; }
+  .upload-label { font-size: 12px; color: #8a7560; line-height: 1.6; }
+  .upload-label strong { color: #5a4a38; font-weight: 500; display: block; margin-bottom: 2px; }
+  .upload-filename { font-size: 12px; color: #2c2318; font-weight: 500; margin-top: 4px; }
+  #logoFile { display: none; }
+
+  /* Submit */
+  .submit-btn {
+    width: 100%;
+    background: #2c2318;
+    color: #f5f0e8;
+    border: none;
+    padding: 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-top: 6px;
+  }
+  .submit-btn:hover { background: #3d3020; }
+  .submit-btn:disabled { background: #b8a88a; cursor: not-allowed; }
+
+  .disclaimer { font-size: 10.5px; color: #9a8872; text-align: center; margin-top: 12px; line-height: 1.6; }
+
+  /* Success */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 32px 20px;
+  }
+  .success-msg .success-title { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; color: #2c2318; margin-bottom: 8px; }
+  .success-msg .success-sub { font-size: 13px; color: #8a7560; line-height: 1.6; }
+
+  .hidden { display: none !important; }
+
+  .bundle-tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border: 1px solid #b8a88a;
+    color: #7a6550;
+    background: #ede6d8;
+    margin-left: 6px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="corner-tr"></div>
+    <div class="corner-bl"></div>
+
+    <div class="header">
+      <p class="eyebrow">Central Street Studio</p>
+      <h1 class="title">Build Your <em>Custom Sign</em></h1>
+      <p class="subtitle">Handmade cedar + birch - laser engraved - built to order</p>
+    </div>
+
+    <div class="rule-double"></div>
+
+    <div id="quoteForm">
+
+      <!-- Logo Panel -->
+      <p class="section-label">Logo panel</p>
+      <div class="choice-grid cols2" style="margin-bottom: 6px;">
+        <div class="choice selected" data-group="logo" data-price="40" data-label="Engraved logo panel" onclick="selectChoice(this)">
+          <div class="check"></div>
+          <p class="choice-name">Engraved</p>
+          <p class="choice-desc">Any logo, flat rate</p>
+          <p class="choice-price">$40</p>
+        </div>
+        <div class="choice" data-group="logo" data-price="75" data-label="3D layered logo panel" onclick="selectChoice(this)">
+          <div class="check"></div>
+          <p class="choice-name">3D layered</p>
+          <p class="choice-desc">Raised elements, cut and glued</p>
+          <p class="choice-note">File review required - not all logos compatible</p>
+          <p class="choice-price">$75</p>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <!-- Sub-signs -->
+      <p class="section-label">Sub-sign panels</p>
+      <div class="counter-row">
+        <div class="counter-left">
+          <p class="counter-label">Number of hanging panels <span id="bundleTag" class="bundle-tag hidden">bundle rate</span></p>
+          <p class="counter-note" id="panelNote">$20 each</p>
+        </div>
+        <div class="counter-controls">
+          <button class="counter-btn" onclick="changeCount(-1)">-</button>
+          <span class="counter-val" id="panelCount">3</span>
+          <button class="counter-btn" onclick="changeCount(1)">+</button>
+          <span class="counter-price" id="panelTotal">$60</span>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <!-- Mounting -->
+      <p class="section-label">Mounting option</p>
+      <div class="choice-grid cols3">
+        <div class="choice selected" data-group="mount" data-price="0" data-label="Standard mounting" onclick="selectChoice(this)">
+          <div class="check"></div>
+          <p class="choice-name">Standard</p>
+          <p class="choice-desc">Ships as-is - attach with zip ties, rope, or hooks</p>
+          <p class="choice-price">Included</p>
+        </div>
+        <div class="choice" data-group="mount" data-price="8" data-label="Tent-mount hardware kit (+$8)" onclick="selectChoice(this)">
+          <div class="check"></div>
+          <p class="choice-name">Tent-mount kit</p>
+          <p class="choice-desc">Pre-drilled with hex bolts and nuts for tent leg</p>
+          <p class="choice-note">You'll need to drill 2 matching holes through your tent leg</p>
+          <p class="choice-price">+$8</p>
+        </div>
+        <div class="choice" data-group="mount" data-price="12" data-label="Magnet mount (+$12)" onclick="selectChoice(this)">
+          <div class="check"></div>
+          <p class="choice-name">Magnet mount</p>
+          <p class="choice-desc">Heavy-duty magnets - no tools or drilling required</p>
+          <p class="choice-note">Requires a metal tent frame</p>
+          <p class="choice-price">+$12</p>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <!-- Total -->
+      <div class="total-bar">
+        <div>
+          <p class="total-label-text">Estimated total</p>
+          <p class="total-breakdown" id="totalBreakdown">Cedar frame $30 + Engraved logo $40 + 3 panels $60</p>
+        </div>
+        <p class="total-amount" id="totalAmount">$130</p>
+      </div>
+
+      <!-- Contact -->
+      <p class="section-label">Your details</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" name="firstName" required placeholder="Rebecca">
+        </div>
+        <div class="field">
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Smith">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+      </div>
+
+      <div class="field">
+        <label for="businessName">Business name</label>
+        <input type="text" id="businessName" name="businessName" placeholder="Your business name">
+      </div>
+
+      <div class="field">
+        <label for="panelWords">What should each panel say?</label>
+        <textarea id="panelWords" name="panelWords" placeholder="e.g. Gifts, Decor, Rentals, Signs"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="notes">Any other notes</label>
+        <textarea id="notes" name="notes" placeholder="Questions, special requests, etc."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Logo file</label>
+        <div class="upload-zone" onclick="document.getElementById('logoFile').click()" id="uploadZone">
+          <p class="upload-label"><strong>Click to upload your logo</strong>SVG, AI, EPS, PNG, or JPG accepted<br>PNG or JPG is fine - file prep is included</p>
+          <p class="upload-filename" id="uploadFilename"></p>
+        </div>
+        <input type="file" id="logoFile" name="logoFile" accept=".svg,.ai,.eps,.png,.jpg,.jpeg,.pdf">
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="submitQuote(event)">Request my quote</button>
+      <p class="disclaimer">This builds your quote request - not a final order. Rebecca will confirm details and send a digital proof before anything is made.</p>
+
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      <p class="success-title">Quote request sent!</p>
+      <p class="success-sub">Thanks - Rebecca will be in touch within 1-2 business days to confirm your order details and send a digital proof.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const FRAME = 30;
+  let logoPrice = 40;
+  let logoLabel = 'Engraved logo panel';
+  let panelCount = 3;
+  let mountPrice = 0;
+  let mountLabel = 'Standard mounting';
+
+  function selectChoice(el) {
+    const group = el.dataset.group;
+    document.querySelectorAll(`.choice[data-group="${group}"]`).forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    if (group === 'logo') {
+      logoPrice = parseInt(el.dataset.price);
+      logoLabel = el.dataset.label;
+    } else if (group === 'mount') {
+      mountPrice = parseInt(el.dataset.price);
+      mountLabel = el.dataset.label;
+    }
+    updateTotal();
+  }
+
+  function changeCount(delta) {
+    panelCount = Math.max(0, Math.min(8, panelCount + delta));
+    document.getElementById('panelCount').textContent = panelCount;
+    const rate = panelCount >= 4 ? 18 : 20;
+    const panelTotal = panelCount * rate;
+    document.getElementById('panelTotal').textContent = '$' + panelTotal;
+    document.getElementById('panelNote').textContent = panelCount >= 4 ? '$18 each (bundle rate)' : '$20 each';
+    const tag = document.getElementById('bundleTag');
+    panelCount >= 4 ? tag.classList.remove('hidden') : tag.classList.add('hidden');
+    updateTotal();
+  }
+
+  function updateTotal() {
+    const rate = panelCount >= 4 ? 18 : 20;
+    const panelTotal = panelCount * rate;
+    const total = FRAME + logoPrice + panelTotal + mountPrice;
+    document.getElementById('totalAmount').textContent = '$' + total;
+    let breakdown = 'Cedar frame $30 + ' + logoLabel + ' $' + logoPrice;
+    if (panelCount > 0) breakdown += ' + ' + panelCount + ' panel' + (panelCount > 1 ? 's' : '') + ' $' + panelTotal;
+    if (mountPrice > 0) breakdown += ' + ' + mountLabel;
+    document.getElementById('totalBreakdown').textContent = breakdown;
+  }
+
+  document.getElementById('logoFile').addEventListener('change', function() {
+    const zone = document.getElementById('uploadZone');
+    const nameEl = document.getElementById('uploadFilename');
+    if (this.files && this.files[0]) {
+      zone.classList.add('has-file');
+      nameEl.textContent = this.files[0].name;
+    } else {
+      zone.classList.remove('has-file');
+      nameEl.textContent = '';
+    }
+  });
+
+  async function submitQuote(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (!firstName || !email) { alert('Please enter your name and email address.'); return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    const rate = panelCount >= 4 ? 18 : 20;
+    const panelTotal = panelCount * rate;
+    const total = FRAME + logoPrice + panelTotal + mountPrice;
+
+    const formData = new FormData();
+    formData.append('_subject', 'New sign quote request from ' + firstName + ' ' + document.getElementById('lastName').value.trim());
+    formData.append('Name', firstName + ' ' + document.getElementById('lastName').value.trim());
+    formData.append('Email', email);
+    formData.append('Business name', document.getElementById('businessName').value.trim());
+    formData.append('Logo panel', logoLabel + ' ($' + logoPrice + ')');
+    formData.append('Number of panels', panelCount + ' panels at $' + rate + ' each = $' + panelTotal + (panelCount >= 4 ? ' (bundle rate)' : ''));
+    formData.append('Mounting', mountLabel);
+    formData.append('Estimated total', '$' + total);
+    formData.append('Panel words', document.getElementById('panelWords').value.trim());
+    formData.append('Notes', document.getElementById('notes').value.trim());
+
+    const fileInput = document.getElementById('logoFile');
+    if (fileInput.files && fileInput.files[0]) {
+      formData.append('logoFile', fileInput.files[0]);
+    }
+
+    try {
+      const res = await fetch('https://formspree.io/f/mnjwlnql', { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+      if (res.ok) {
+        document.getElementById('quoteForm').classList.add('hidden');
+        document.getElementById('successMsg').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Request my quote';
+        alert('Something went wrong - please email info@centralstreetstudio.com directly.');
+      }
+    } catch(err) {
+      btn.disabled = false;
+      btn.textContent = 'Request my quote';
+      alert('Something went wrong - please email info@centralstreetstudio.com directly.');
+    }
+  }
+
+  updateTotal();
+
+  function resizeIframe() {
+    const h = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'resize', height: h }, '*');
+  }
+  const ro = new ResizeObserver(resizeIframe);
+  ro.observe(document.body);
+  resizeIframe();
+</script>
+</body>
+</html>
