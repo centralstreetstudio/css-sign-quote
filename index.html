@@ -100,6 +100,10 @@
   }
   .cta-btn:hover { background: #ede6d8; }
 
+  .choice[data-group="font"].selected { background: #faf7f2; border: 2px solid #2c2318; }
+  .choice[data-group="font"].selected .choice-radio { border-color: #2c2318; }
+  .choice[data-group="font"].selected .choice-radio::after { background: #2c2318; }
+  .choice[data-group="font"].selected span { color: #2c2318 !important; }
   .hidden { display: none !important; }
 </style>
 </head>
@@ -164,6 +168,24 @@
     </div>
   </div>
 
+  <div style="margin-top: 8px;">
+    <p class="section-label" style="margin-bottom: 8px;">Sub-sign font</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div class="choice selected" data-group="font" data-label="Serif" onclick="selectChoice(this)" style="justify-content:center; padding: 16px 14px;">
+        <div class="choice-left" style="justify-content:center; gap:8px;">
+          <div class="choice-radio"></div>
+          <span style="font-family:'Georgia',serif; font-size:18px; letter-spacing:0.12em; color:inherit;">SERIF</span>
+        </div>
+      </div>
+      <div class="choice" data-group="font" data-label="Sans Serif" onclick="selectChoice(this)" style="justify-content:center; padding: 16px 14px;">
+        <div class="choice-left" style="justify-content:center; gap:8px;">
+          <div class="choice-radio"></div>
+          <span style="font-family:'DM Sans',sans-serif; font-size:16px; letter-spacing:0.2em; font-weight:300; color:inherit;">SANS SERIF</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="rule"></div>
 
   <!-- Mounting -->
@@ -220,6 +242,7 @@
     <div class="summary-line"><span>Logo panel</span><span id="summaryLogo">Engraved — $40</span></div>
     <div class="summary-line"><span>Sub-sign panels</span><span id="summaryPanels">3 panels — $60</span></div>
     <div class="summary-line"><span>Mounting</span><span id="summaryMount">Standard — included</span></div>
+    <div class="summary-line"><span>Sub-sign font</span><span id="summaryFont">Serif</span></div>
     <div class="summary-line" style="padding-top:8px; margin-top:4px; border-top: 1px solid #c8b99a; border-bottom:none;">
       <span style="font-weight:500;">Estimated total</span>
       <span id="summaryTotal" style="font-family:'Playfair Display',serif; font-size:16px; font-weight:600;">$130</span>
@@ -242,6 +265,7 @@
   let logoPrice = 40, logoLabel = 'Engraved';
   let panelCount = 3;
   let mountPrice = 0, mountLabel = 'Standard mounting';
+  let fontLabel = 'Serif';
 
   function selectChoice(el) {
     const group = el.dataset.group;
@@ -249,6 +273,7 @@
     el.classList.add('selected');
     if (group === 'logo') { logoPrice = parseInt(el.dataset.price); logoLabel = el.dataset.label; }
     else if (group === 'mount') { mountPrice = parseInt(el.dataset.price); mountLabel = el.dataset.label; }
+    else if (group === 'font') { fontLabel = el.dataset.label; }
     updateTotal();
   }
 
@@ -279,6 +304,7 @@
     document.getElementById('summaryLogo').textContent = logoLabel + ' — $' + logoPrice;
     document.getElementById('summaryPanels').textContent = panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' — $' + panelTotal;
     document.getElementById('summaryMount').textContent = mountPrice > 0 ? mountLabel + ' — +$' + mountPrice : 'Standard — included';
+    document.getElementById('summaryFont').textContent = fontLabel;
     document.getElementById('summaryTotal').textContent = '$' + total;
 
     updateMessageBlock();
@@ -293,6 +319,7 @@
       '- Logo panel: ' + logoLabel + ' ($' + logoPrice + ')\n' +
       '- Sub-sign panels: ' + panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' ($' + panelTotal + (panelCount >= 4 ? ' - bundle rate' : '') + ')\n' +
       '- Mounting: ' + mountLabel + (mountPrice > 0 ? ' (+$' + mountPrice + ')' : ' (included)') + '\n' +
+      '- Sub-sign font: ' + fontLabel + '\n' +
       '- Estimated total: $' + total + '\n\n' +
       'What each panel should say:\n[Please fill in]\n\n' +
       'I\'ve attached my logo file to this email.\n\nThanks!';
