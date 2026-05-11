@@ -352,7 +352,7 @@
     const fileInput = document.getElementById('logoFile');
     if (fileInput.files && fileInput.files[0]) formData.append('logoFile', fileInput.files[0]);
     try {
-      const res = await fetch('https://formspree.io/f/mnjwlnql', { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+      const res = await fetch('https://formspree.io/f/mbdwqznv', { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
       if (res.ok) {
         document.getElementById('quoteForm').classList.add('hidden');
         document.getElementById('successMsg').style.display = 'block';
