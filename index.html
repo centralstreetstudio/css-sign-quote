@@ -226,6 +226,43 @@
     <span class="choice-price">+$12</span>
   </div>
 
+  <!-- Shipping -->
+  <div class="rule"></div>
+  <p class="section-label">Pickup & delivery</p>
+
+  <div class="choice selected" data-group="shipping" data-label="Free pickup - Tyngsboro, MA" onclick="selectChoice(this)">
+    <div class="choice-left">
+      <div class="choice-radio"></div>
+      <div class="choice-text">
+        <p class="choice-name">Free pickup</p>
+        <p class="choice-desc">Tyngsboro, MA</p>
+      </div>
+    </div>
+    <span class="choice-price">Free</span>
+  </div>
+
+  <div class="choice" data-group="shipping" data-label="Local delivery - within 25 miles of Tyngsboro, MA (+$15)" onclick="selectChoice(this)">
+    <div class="choice-left">
+      <div class="choice-radio"></div>
+      <div class="choice-text">
+        <p class="choice-name">Local delivery</p>
+        <p class="choice-desc">Within 25 miles of Tyngsboro - Lowell, Nashua, Chelmsford, and surrounding towns</p>
+      </div>
+    </div>
+    <span class="choice-price">+$15</span>
+  </div>
+
+  <div class="choice" data-group="shipping" data-label="Shipping - rate quoted per order" onclick="selectChoice(this)">
+    <div class="choice-left">
+      <div class="choice-radio"></div>
+      <div class="choice-text">
+        <p class="choice-name">Shipping</p>
+        <p class="choice-desc">Typically $20-35 within New England - quoted per order for all other locations</p>
+      </div>
+    </div>
+    <span class="choice-price">Quoted</span>
+  </div>
+
   <!-- Total -->
   <div class="total-bar">
     <div class="total-top">
@@ -243,6 +280,7 @@
     <div class="summary-line"><span>Sub-sign panels</span><span id="summaryPanels">3 panels — $60</span></div>
     <div class="summary-line"><span>Mounting</span><span id="summaryMount">Standard — included</span></div>
     <div class="summary-line"><span>Sub-sign font</span><span id="summaryFont">Serif</span></div>
+    <div class="summary-line"><span>Pickup & delivery</span><span id="summaryShipping">Free pickup</span></div>
     <div class="summary-line" style="padding-top:8px; margin-top:4px; border-top: 1px solid #c8b99a; border-bottom:none;">
       <span style="font-weight:500;">Estimated total</span>
       <span id="summaryTotal" style="font-family:'Playfair Display',serif; font-size:16px; font-weight:600;">$130</span>
@@ -250,7 +288,7 @@
   </div>
 
   <div style="background:#f0ebe0; border:1.5px solid #d6c9b0; padding:12px 14px; margin-bottom:12px;">
-    <p style="font-size:11px; color:#5a4a38; line-height:1.7;"><strong style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8a7560;">Turnaround time</strong><br>Please allow up to 10 business days to process your order. Rush orders can be arranged for an additional fee — just mention it in your message.</p>
+    <p style="font-size:11px; color:#5a4a38; line-height:1.7;"><strong style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8a7560;">Turnaround time</strong><br>Please allow up to 10 business days to process your order. Rush orders can be arranged for an additional fee - just mention it in your message.</p>
   </div>
 
   <div class="cta-box">
@@ -270,6 +308,7 @@
   let panelCount = 3;
   let mountPrice = 0, mountLabel = 'Standard mounting';
   let fontLabel = 'Serif';
+  let shippingLabel = 'Free pickup - Tyngsboro, MA';
 
   function selectChoice(el) {
     const group = el.dataset.group;
@@ -278,6 +317,7 @@
     if (group === 'logo') { logoPrice = parseInt(el.dataset.price); logoLabel = el.dataset.label; }
     else if (group === 'mount') { mountPrice = parseInt(el.dataset.price); mountLabel = el.dataset.label; }
     else if (group === 'font') { fontLabel = el.dataset.label; }
+    else if (group === 'shipping') { shippingLabel = el.dataset.label; }
     updateTotal();
   }
 
@@ -309,6 +349,7 @@
     document.getElementById('summaryPanels').textContent = panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' — $' + panelTotal;
     document.getElementById('summaryMount').textContent = mountPrice > 0 ? mountLabel + ' — +$' + mountPrice : 'Standard — included';
     document.getElementById('summaryFont').textContent = fontLabel;
+    document.getElementById('summaryShipping').textContent = shippingLabel;
     document.getElementById('summaryTotal').textContent = '$' + total;
 
     updateMessageBlock();
@@ -324,6 +365,7 @@
       '- Sub-sign panels: ' + panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' ($' + panelTotal + (panelCount >= 4 ? ' - bundle rate' : '') + ')\n' +
       '- Mounting: ' + mountLabel + (mountPrice > 0 ? ' (+$' + mountPrice + ')' : ' (included)') + '\n' +
       '- Sub-sign font: ' + fontLabel + '\n' +
+      '- Pickup & delivery: ' + shippingLabel + '\n' +
       '- Estimated total: $' + total + '\n\n' +
       'What each panel should say:\n[Please fill in]\n\n' +
       'I\'ve attached my logo file to this email.\n\nThanks!';
