@@ -227,9 +227,12 @@
   </div>
 
   <div class="cta-box">
-    <p class="cta-instruction">Ready to move forward? Click the button below — it will open a pre-filled email with your selections included. Just attach your logo and hit send. Becca will confirm details and send a digital proof before anything is made.</p>
-    <a class="cta-btn" id="ctaBtn" href="mailto:info@centralstreetstudio.com">Email your logo to get started</a>
-    <p style="font-size:10px; color:#a09080; margin-top:12px; line-height:1.6;">If you have any trouble, email your selections and logo directly to <strong style="color:#c8baa8;">info@centralstreetstudio.com</strong></p>
+    <p class="cta-instruction">Ready to move forward? Copy the message below and email it to <strong>info@centralstreetstudio.com</strong> with your logo attached. Becca will confirm details and send a digital proof before anything is made.</p>
+
+    <div id="copyBlock" style="background:#f5f0e8; padding:14px; margin-bottom:10px; font-size:12px; color:#2c2318; line-height:1.8; white-space:pre-wrap; font-family:'DM Sans',sans-serif;" id="messageText"></div>
+
+    <button class="cta-btn" onclick="copyMessage()" id="copyBtn">Copy message</button>
+    <p style="font-size:10px; color:#a09080; margin-top:12px; line-height:1.6;">Paste this into an email to <strong style="color:#c8baa8;">info@centralstreetstudio.com</strong> and attach your logo file.</p>
   </div>
 
 </div>
@@ -278,28 +281,50 @@
     document.getElementById('summaryMount').textContent = mountPrice > 0 ? mountLabel + ' — +$' + mountPrice : 'Standard — included';
     document.getElementById('summaryTotal').textContent = '$' + total;
 
-    // Update mailto link with selections pre-filled
-    const subject = encodeURIComponent('Custom Sign Quote Request');
-    const body = encodeURIComponent(
-      'Hi Becca,\n\nI\'d like to move forward with a custom hanging sign. Here are my selections:\n\n' +
+    updateMessageBlock();
+  }
+
+  function getMessageText() {
+    const rate = panelCount >= 4 ? 18 : 20;
+    const panelTotal = panelCount * rate;
+    const total = FRAME + logoPrice + panelTotal + mountPrice;
+    return 'Hi Becca,\n\nI\'d like to move forward with a custom hanging sign. Here are my selections:\n\n' +
       '- Cedar frame: $30\n' +
       '- Logo panel: ' + logoLabel + ' ($' + logoPrice + ')\n' +
       '- Sub-sign panels: ' + panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' ($' + panelTotal + (panelCount >= 4 ? ' - bundle rate' : '') + ')\n' +
       '- Mounting: ' + mountLabel + (mountPrice > 0 ? ' (+$' + mountPrice + ')' : ' (included)') + '\n' +
       '- Estimated total: $' + total + '\n\n' +
       'What each panel should say:\n[Please fill in]\n\n' +
-      'I\'ve attached my logo file to this email.\n\nThanks!'
-    );
-    document.getElementById('ctaBtn').href = 'mailto:info@centralstreetstudio.com?subject=' + subject + '&body=' + body;
+      'I\'ve attached my logo file to this email.\n\nThanks!';
   }
 
-  updateTotal();
+  function updateMessageBlock() {
+    document.getElementById('copyBlock').textContent = getMessageText();
+  }
+
+  function copyMessage() {
+    const text = getMessageText();
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy message', 2000);
+    }).catch(() => {
+      // Fallback: select the text in the block
+      const el = document.getElementById('copyBlock');
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    });
+  }
 
   function notifyHeight() {
     window.parent.postMessage({ type: 'resize', height: document.body.scrollHeight }, '*');
   }
   new ResizeObserver(notifyHeight).observe(document.body);
   notifyHeight();
+  updateTotal();
 </script>
 </body>
 </html>
