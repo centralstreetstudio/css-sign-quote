@@ -110,13 +110,11 @@
 <body>
 <div class="wrap">
 
-  <p class="eyebrow">Central Street Studio</p>
-  <h1 class="title">Build Your <em>Custom Sign</em></h1>
-  <p class="subtitle">Handmade cedar + birch - laser engraved - built to order</p>
-
   <div class="rule-double"></div>
 
   <!-- Frame -->
+  <p class="section-label">Frame</p>
+
   <div style="background:#f0ebe0; border:1.5px solid #d6c9b0; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
     <div>
       <p style="font-size:13px; font-weight:500; color:#2c2318; margin-bottom:2px;">Cedar frame</p>
@@ -128,37 +126,22 @@
   <!-- Logo Panel -->
   <p class="section-label">Logo panel</p>
 
-  <div class="choice selected" data-group="logo" data-price="40" data-label="Engraved" onclick="selectChoice(this)">
-    <div class="choice-left">
-      <div class="choice-radio"></div>
-      <div class="choice-text">
-        <p class="choice-name">Engraved</p>
-        <p class="choice-desc">Any logo - flat rate</p>
-      </div>
+  <div style="background:#f0ebe0; border:1.5px solid #d6c9b0; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+    <div>
+      <p style="font-size:13px; font-weight:500; color:#2c2318; margin-bottom:2px;">Engraved</p>
+      <p style="font-size:11px; color:#9a8872;">Panel: 15" wide, 6" tall | Your brand logo</p>
     </div>
-    <span class="choice-price">$40</span>
-  </div>
-
-  <div class="choice" data-group="logo" data-price="75" data-label="3D layered" onclick="selectChoice(this)">
-    <div class="choice-left">
-      <div class="choice-radio"></div>
-      <div class="choice-text">
-        <p class="choice-name">3D layered</p>
-        <p class="choice-desc">Raised elements, cut and glued</p>
-        <p class="choice-note">File review required - not all logos compatible</p>
-      </div>
-    </div>
-    <span class="choice-price">$75</span>
+    <span style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; color:#2c2318;">$45</span>
   </div>
 
   <div class="rule"></div>
 
   <!-- Sub-signs -->
-  <p class="section-label">Sub-sign panels</p>
+  <p class="section-label">Sub-Panels</p>
   <div class="counter-row">
     <div>
       <p class="counter-label">Hanging panels <span id="bundleTag" class="bundle-tag hidden">bundle rate</span></p>
-      <p class="counter-note" id="panelNote">$20 each - $18 each for 4+</p>
+      <p class="counter-note" id="panelNote">Each panel: 15" wide, 3" tall  |  $20 each - $18 each for 4+</p>
     </div>
     <div class="counter-controls">
       <button class="counter-btn" onclick="changeCount(-1)">-</button>
@@ -169,7 +152,7 @@
   </div>
 
   <div style="margin-top: 8px;">
-    <p class="section-label" style="margin-bottom: 8px;">Sub-sign font</p>
+    <p class="section-label" style="margin-bottom: 8px;">Sub-panel font</p>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
       <div class="choice selected" data-group="font" data-label="Serif" onclick="selectChoice(this)" style="justify-content:center; padding: 16px 14px;">
         <div class="choice-left" style="justify-content:center; gap:8px;">
@@ -226,6 +209,33 @@
     <span class="choice-price">+$12</span>
   </div>
 
+  <div class="rule"></div>
+
+  <!-- Weather-proofing -->
+  <p class="section-label">Weather-proofing</p>
+
+  <div class="choice selected" data-group="weatherproof" data-price="0" data-label="None" onclick="selectChoice(this)">
+    <div class="choice-left">
+      <div class="choice-radio"></div>
+      <div class="choice-text">
+        <p class="choice-name">None</p>
+        <p class="choice-desc">Natural wood</p>
+      </div>
+    </div>
+    <span class="choice-price">Included</span>
+  </div>
+
+  <div class="choice" data-group="weatherproof" data-price="45" data-label="+ Protective Coat" onclick="selectChoice(this)">
+    <div class="choice-left">
+      <div class="choice-radio"></div>
+      <div class="choice-text">
+        <p class="choice-name">+ Protective Coat</p>
+        <p class="choice-desc">Clear Polycrylic</p>
+      </div>
+    </div>
+    <span class="choice-price">+$45</span>
+  </div>
+
   <!-- Shipping -->
   <div class="rule"></div>
   <p class="section-label">Pickup & delivery</p>
@@ -246,7 +256,7 @@
       <div class="choice-radio"></div>
       <div class="choice-text">
         <p class="choice-name">Local delivery</p>
-        <p class="choice-desc">Within 25 miles of Tyngsboro - Lowell, Nashua, Chelmsford, and surrounding towns</p>
+        <p class="choice-desc">Within 25 miles of Tyngsboro</p>
       </div>
     </div>
     <span class="choice-price">+$15</span>
@@ -257,7 +267,7 @@
       <div class="choice-radio"></div>
       <div class="choice-text">
         <p class="choice-name">Shipping</p>
-        <p class="choice-desc">Typically $20-35 within New England - quoted per order for all other locations</p>
+        <p class="choice-desc">Quoted by weight/shipping location</p>
       </div>
     </div>
     <span class="choice-price">Quoted</span>
@@ -267,23 +277,24 @@
   <div class="total-bar">
     <div class="total-top">
       <span class="total-label-text">Estimated total</span>
-      <span class="total-amount" id="totalAmount">$130</span>
+      <span class="total-amount" id="totalAmount">$135</span>
     </div>
-    <p class="total-breakdown" id="totalBreakdown">Cedar frame $30 + Engraved logo $40 + 3 panels $60</p>
+    <p class="total-breakdown" id="totalBreakdown">Cedar frame $30 + Engraved logo $45 + 3 panels $60</p>
   </div>
 
   <!-- Summary + CTA -->
   <div class="summary-box">
     <p class="summary-title">Your selections</p>
     <div class="summary-line"><span>Cedar frame</span><span>$30</span></div>
-    <div class="summary-line"><span>Logo panel</span><span id="summaryLogo">Engraved — $40</span></div>
-    <div class="summary-line"><span>Sub-sign panels</span><span id="summaryPanels">3 panels — $60</span></div>
+    <div class="summary-line"><span>Logo panel</span><span id="summaryLogo">Engraved — $45</span></div>
+    <div class="summary-line"><span>Sub-Panels</span><span id="summaryPanels">3 panels — $60</span></div>
     <div class="summary-line"><span>Mounting</span><span id="summaryMount">Standard — included</span></div>
-    <div class="summary-line"><span>Sub-sign font</span><span id="summaryFont">Serif</span></div>
+    <div class="summary-line"><span>Weather-proofing</span><span id="summaryWeatherproof">Standard — included</span></div>
+    <div class="summary-line"><span>Sub-panel font</span><span id="summaryFont">Serif</span></div>
     <div class="summary-line"><span>Pickup & delivery</span><span id="summaryShipping">Free pickup</span></div>
     <div class="summary-line" style="padding-top:8px; margin-top:4px; border-top: 1px solid #c8b99a; border-bottom:none;">
       <span style="font-weight:500;">Estimated total</span>
-      <span id="summaryTotal" style="font-family:'Playfair Display',serif; font-size:16px; font-weight:600;">$130</span>
+      <span id="summaryTotal" style="font-family:'Playfair Display',serif; font-size:16px; font-weight:600;">$135</span>
     </div>
   </div>
 
@@ -304,9 +315,10 @@
 
 <script>
   const FRAME = 30;
-  let logoPrice = 40, logoLabel = 'Engraved';
+  const logoPrice = 45, logoLabel = 'Engraved';
   let panelCount = 3;
   let mountPrice = 0, mountLabel = 'Standard mounting';
+  let weatherproofPrice = 0, weatherproofLabel = 'None';
   let fontLabel = 'Serif';
   let shippingLabel = 'Free pickup - Tyngsboro, MA';
 
@@ -314,8 +326,8 @@
     const group = el.dataset.group;
     document.querySelectorAll(`.choice[data-group="${group}"]`).forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
-    if (group === 'logo') { logoPrice = parseInt(el.dataset.price); logoLabel = el.dataset.label; }
-    else if (group === 'mount') { mountPrice = parseInt(el.dataset.price); mountLabel = el.dataset.label; }
+    if (group === 'mount') { mountPrice = parseInt(el.dataset.price); mountLabel = el.dataset.label; }
+    else if (group === 'weatherproof') { weatherproofPrice = parseInt(el.dataset.price); weatherproofLabel = el.dataset.label; }
     else if (group === 'font') { fontLabel = el.dataset.label; }
     else if (group === 'shipping') { shippingLabel = el.dataset.label; }
     updateTotal();
@@ -326,7 +338,7 @@
     document.getElementById('panelCount').textContent = panelCount;
     const rate = panelCount >= 4 ? 18 : 20;
     document.getElementById('panelTotal').textContent = '$' + (panelCount * rate);
-    document.getElementById('panelNote').textContent = panelCount >= 4 ? '$18 each (bundle rate)' : '$20 each - $18 each for 4+';
+    document.getElementById('panelNote').textContent = panelCount >= 4 ? 'Each panel: 15" wide, 3" tall  |  $18 each (bundle rate)' : 'Each panel: 15" wide, 3" tall  |  $20 each - $18 each for 4+';
     const tag = document.getElementById('bundleTag');
     panelCount >= 4 ? tag.classList.remove('hidden') : tag.classList.add('hidden');
     updateTotal();
@@ -335,19 +347,21 @@
   function updateTotal() {
     const rate = panelCount >= 4 ? 18 : 20;
     const panelTotal = panelCount * rate;
-    const total = FRAME + logoPrice + panelTotal + mountPrice;
+    const total = FRAME + logoPrice + panelTotal + mountPrice + weatherproofPrice;
 
     // Update total bar
     document.getElementById('totalAmount').textContent = '$' + total;
     let b = 'Cedar frame $30 + ' + logoLabel + ' logo $' + logoPrice;
     if (panelCount > 0) b += ' + ' + panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' $' + panelTotal;
     if (mountPrice > 0) b += ' + ' + mountLabel;
+    if (weatherproofPrice > 0) b += ' + ' + weatherproofLabel;
     document.getElementById('totalBreakdown').textContent = b;
 
     // Update summary box
     document.getElementById('summaryLogo').textContent = logoLabel + ' — $' + logoPrice;
     document.getElementById('summaryPanels').textContent = panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' — $' + panelTotal;
     document.getElementById('summaryMount').textContent = mountPrice > 0 ? mountLabel + ' — +$' + mountPrice : 'Standard — included';
+    document.getElementById('summaryWeatherproof').textContent = weatherproofPrice > 0 ? weatherproofLabel + ' — +$' + weatherproofPrice : 'None — included';
     document.getElementById('summaryFont').textContent = fontLabel;
     document.getElementById('summaryShipping').textContent = shippingLabel;
     document.getElementById('summaryTotal').textContent = '$' + total;
@@ -358,13 +372,14 @@
   function getMessageText() {
     const rate = panelCount >= 4 ? 18 : 20;
     const panelTotal = panelCount * rate;
-    const total = FRAME + logoPrice + panelTotal + mountPrice;
+    const total = FRAME + logoPrice + panelTotal + mountPrice + weatherproofPrice;
     return 'Hi Becca,\n\nI\'d like to move forward with a custom hanging sign. Here are my selections:\n\n' +
       '- Cedar frame: $30\n' +
       '- Logo panel: ' + logoLabel + ' ($' + logoPrice + ')\n' +
-      '- Sub-sign panels: ' + panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' ($' + panelTotal + (panelCount >= 4 ? ' - bundle rate' : '') + ')\n' +
+      '- Sub-Panels: ' + panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' ($' + panelTotal + (panelCount >= 4 ? ' - bundle rate' : '') + ')\n' +
       '- Mounting: ' + mountLabel + (mountPrice > 0 ? ' (+$' + mountPrice + ')' : ' (included)') + '\n' +
-      '- Sub-sign font: ' + fontLabel + '\n' +
+      '- Weather-proofing: ' + weatherproofLabel + (weatherproofPrice > 0 ? ' (+$' + weatherproofPrice + ')' : ' (included)') + '\n' +
+      '- Sub-panel font: ' + fontLabel + '\n' +
       '- Pickup & delivery: ' + shippingLabel + '\n' +
       '- Estimated total: $' + total + '\n\n' +
       'What each panel should say:\n[Please fill in]\n\n' +
