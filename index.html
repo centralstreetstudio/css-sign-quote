@@ -110,6 +110,8 @@
 <body>
 <div class="wrap">
 
+  <p class="title">Vendor Sign Quote Calculator</p>
+
   <div class="rule-double"></div>
 
   <!-- Frame -->
@@ -289,7 +291,7 @@
     <div class="summary-line"><span>Logo panel</span><span id="summaryLogo">Engraved — $45</span></div>
     <div class="summary-line"><span>Sub-Panels</span><span id="summaryPanels">3 panels — $60</span></div>
     <div class="summary-line"><span>Mounting</span><span id="summaryMount">Standard — included</span></div>
-    <div class="summary-line"><span>Weather-proofing</span><span id="summaryWeatherproof">Standard — included</span></div>
+    <div class="summary-line"><span>Weather-proofing</span><span id="summaryWeatherproof">None — included</span></div>
     <div class="summary-line"><span>Sub-panel font</span><span id="summaryFont">Serif</span></div>
     <div class="summary-line"><span>Pickup & delivery</span><span id="summaryShipping">Free pickup</span></div>
     <div class="summary-line" style="padding-top:8px; margin-top:4px; border-top: 1px solid #c8b99a; border-bottom:none;">
@@ -299,7 +301,7 @@
   </div>
 
   <div style="background:#f0ebe0; border:1.5px solid #d6c9b0; padding:12px 14px; margin-bottom:12px;">
-    <p style="font-size:11px; color:#5a4a38; line-height:1.7;"><strong style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8a7560;">Turnaround time</strong><br>Please allow up to 10 business days to process your order. Rush orders can be arranged for an additional fee - just mention it in your message.</p>
+    <p style="font-size:11px; color:#5a4a38; line-height:1.7;"><strong style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8a7560;">Turnaround time</strong><br>Please allow up to 14 business days to process your order. Rush orders can be arranged for an additional fee - just mention it in your message.</p>
   </div>
 
   <div class="cta-box">
@@ -350,7 +352,7 @@
     const total = FRAME + logoPrice + panelTotal + mountPrice + weatherproofPrice;
 
     // Update total bar
-    document.getElementById('totalAmount').textContent = '$' + total;
+    document.getElementById('totalAmount').textContent = '$' + total + (shippingLabel === 'Shipping - rate quoted per order' ? ' + shipping' : '');
     let b = 'Cedar frame $30 + ' + logoLabel + ' logo $' + logoPrice;
     if (panelCount > 0) b += ' + ' + panelCount + ' panel' + (panelCount !== 1 ? 's' : '') + ' $' + panelTotal;
     if (mountPrice > 0) b += ' + ' + mountLabel;
@@ -364,7 +366,7 @@
     document.getElementById('summaryWeatherproof').textContent = weatherproofPrice > 0 ? weatherproofLabel + ' — +$' + weatherproofPrice : 'None — included';
     document.getElementById('summaryFont').textContent = fontLabel;
     document.getElementById('summaryShipping').textContent = shippingLabel;
-    document.getElementById('summaryTotal').textContent = '$' + total;
+    document.getElementById('summaryTotal').textContent = '$' + total + (shippingLabel === 'Shipping - rate quoted per order' ? ' + shipping' : '');
 
     updateMessageBlock();
   }
@@ -381,7 +383,7 @@
       '- Weather-proofing: ' + weatherproofLabel + (weatherproofPrice > 0 ? ' (+$' + weatherproofPrice + ')' : ' (included)') + '\n' +
       '- Sub-panel font: ' + fontLabel + '\n' +
       '- Pickup & delivery: ' + shippingLabel + '\n' +
-      '- Estimated total: $' + total + '\n\n' +
+      '- Estimated total: $' + total + (shippingLabel === 'Shipping - rate quoted per order' ? ' + shipping' : '') + '\n\n' +
       'What each panel should say:\n[Please fill in]\n\n' +
       'I\'ve attached my logo file to this email.\n\nThanks!';
   }
